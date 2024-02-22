@@ -35,12 +35,19 @@ for (const seat of allSeats) {
 
             // available seat 
             const available = document.getElementById('availableSeat')
-            available.innerText = parseInt(available.innerText) - parseInt(seatNumbetTotal.innerText)
+            available.innerText = 40 - parseInt(seatNumbetTotal.innerText)
 
+
+            if (parseInt(seatNumbetTotal.innerText) + 1 === 4) {
+                const aplyybtn = document.getElementById("applyBtn");
+                aplyybtn.removeAttribute(disabled)
+            }
 
         } else {
             alert("You can not buy more then 4 tickets")
         }
+
+
     });
 
 }
@@ -52,13 +59,27 @@ document.getElementById("applyBtn").addEventListener('click', function () {
     if (inputIdd.value === 'NEW15') {
         grandTotalTaka.innerText = grandTotalValue - grandTotalValue * 0.15
         document.getElementById('inputArea').classList.add('hidden')
+        const value = grandTotalValue * 0.15
+        addDiscount(value)
     }
-    if (inputIdd.value === 'COUPLE20') {
+    if (inputIdd.value === 'Couple 20') {
         grandTotalTaka.innerText = grandTotalValue - grandTotalValue * 0.2
         document.getElementById('inputArea').classList.add('hidden')
+        const value = grandTotalValue * 0.2
+        addDiscount(value)
     }
-})
 
+})
+function addDiscount(value) {
+    const discountId = document.getElementById("discountTaka")
+
+    discountId.innerHTML = `
+   <div class="flex justify-between">
+   <p>Discount price : </p>
+   <p class="mr-8">${value}</p>
+</div>
+   `
+}
 
 function addSeat(seatName) {
     const sectionName = document.getElementById("seatSection");
